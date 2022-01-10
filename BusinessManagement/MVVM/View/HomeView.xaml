@@ -1,0 +1,65 @@
+﻿<Window x:Class="BusinessManagement.MVVM.View.HomeView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BusinessManagement.MVVM.View"
+         xmlns:viewModel="clr-namespace:BusinessManagement.MVVM.ViewModel"
+        mc:Ignorable="d"
+        Title="HomeView" Height="768" Width="1024"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        WindowStyle="None"
+        Background="Transparent"
+        AllowsTransparency="True">
+    <Window.DataContext>
+        <viewModel:HomeViewModel/>
+    </Window.DataContext>
+    <Border Background="#272537"
+                CornerRadius="10">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="253"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="110"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="Business&#xA;Management"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                       Foreground="White"
+                       FontSize="24"
+                       FontFamily="/Fonts/#Poppins" Height="84" Width="190"/>
+
+            <StackPanel Grid.Row="1">
+                <RadioButton Content="Home"
+                             Height="50"
+                             Foreground="White"
+                             FontSize="18"
+                             Style="{StaticResource MenuButtonTheme}"
+                             IsChecked="True"
+                             Command="{Binding HomeViewCommand}"/>
+                <RadioButton Content="Customers"
+                             Height="50"
+                             Foreground="White"
+                             FontSize="18"
+                             Style="{StaticResource MenuButtonTheme}"
+                             Command="{Binding HomeViewCommand}"/>
+                <RadioButton Content="Suppliers"
+                             Height="50"
+                             Foreground="White"
+                             FontSize="18"
+                             Style="{StaticResource MenuButtonTheme}"
+                             Command="{Binding HomeViewCommand}"/>
+            </StackPanel>
+
+            <StackPanel Grid.Row="1" Grid.Column="1">
+                <DataGrid Name="UsersGrid" ItemsSource="{Binding Users}"/>
+            </StackPanel>
+        </Grid>
+    </Border>
+</Window>
