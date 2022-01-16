@@ -12,9 +12,9 @@
         WindowStyle="None"
         Background="Transparent"
         AllowsTransparency="True">
-    <Window.DataContext>
+    <!--<Window.DataContext>
         <viewModel:HomeViewModel/>
-    </Window.DataContext>
+    </Window.DataContext>-->
     <Border Background="#272537"
                 CornerRadius="10">
         <Grid>
@@ -57,6 +57,9 @@
                              Command="{Binding HomeViewCommand}"/>
             </StackPanel>
 
+            <Button Grid.Column="1" Grid.Row="1"
+                    Command="{Binding GetUsersCommand}">Get users</Button>
+            
             <StackPanel Grid.Row="1" Grid.Column="1">
                 <DataGrid Name="UsersGrid" ItemsSource="{Binding Users}"/>
             </StackPanel>

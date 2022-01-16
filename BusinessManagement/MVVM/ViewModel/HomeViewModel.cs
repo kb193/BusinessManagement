@@ -1,23 +1,45 @@
-﻿using BusinessManagement.Data;
+﻿using BusinessManagement.Core;
+using BusinessManagement.Data;
 using BusinessManagement.Models;
+using BusinessManagement.Services;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace BusinessManagement.MVVM.ViewModel
 {
-    public class HomeViewModel
+    public class HomeViewModel : INotifyPropertyChanged
     {
-        private readonly BusinessManagementDbContext dbContext;
-        public List<User> Users { get; set; }
+        private readonly IUserRepository userRepo;
 
-        public HomeViewModel(BusinessManagementDbContext dbContext)
+        public event PropertyChangedEventHandler PropertyChanged = delegate { };
+
+        private List<User> _users;
+        public List<User> Users
         {
-            this.dbContext = dbContext;
+            get => _users;
+            set
+            {
+                _users = value;
+                PropertyChanged(this, new PropertyChangedEventArgs(nameof(Users)));
+            }
+        }
 
-            //Users = dbContext.Users.ToList();
+        public RelayCommand GetUsersCommand { get; set; }
+
+        public HomeViewModel(IUserRepository userRepo)
+        {
+            this.userRepo = userRepo;
+
+            GetUsersCommand = new RelayCommand(async (o) =>
+            {
+                Users = await userRepo.GetUsersAsync();
+            });
+
+            //Users = userRepo.GetUsersAsync().Result;
         }
 
 

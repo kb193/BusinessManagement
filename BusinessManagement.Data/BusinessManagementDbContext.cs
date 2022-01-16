@@ -12,15 +12,16 @@ namespace BusinessManagement.Data
     {
         public BusinessManagementDbContext(DbContextOptions<BusinessManagementDbContext> options) : base(options)
         {
-            Database.EnsureCreated();
+            Database.Migrate();
         }
 
+     
         public DbSet<User> Users { get; set; }
-
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<User>().HasData(new User { Username = "admin", Password = "admin" });
+
+            modelBuilder.Entity<User>().HasData(new User {Id = 1 ,Username = "admin", Password = "admin" });
             base.OnModelCreating(modelBuilder);
         }
     }

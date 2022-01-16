@@ -1,4 +1,6 @@
 ﻿using BusinessManagement.Data;
+using BusinessManagement.MVVM.ViewModel;
+using BusinessManagement.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Unity;
 
 namespace BusinessManagement.MVVM.View
 {
@@ -21,10 +24,16 @@ namespace BusinessManagement.MVVM.View
     /// </summary>
     public partial class MainWindow : Window
     {
+        private readonly IUserRepository userRepo;
+        private readonly MainWindowViewModel mainWindowVm;
+        private readonly HomeView homeView;
 
-        public MainWindow()
+        public MainWindow(MainWindowViewModel mainWindowVm, HomeView homeView)
         {
             InitializeComponent();
+            this.mainWindowVm = mainWindowVm;
+            this.homeView = homeView;
+            // userRepo = _userRepo;
         }
 
         public void Login()
@@ -34,7 +43,8 @@ namespace BusinessManagement.MVVM.View
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-            HomeView homeView = new HomeView();
+            //Login logic
+
             homeView.Show();
             this.Visibility = Visibility.Hidden;
         }

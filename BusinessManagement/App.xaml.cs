@@ -1,14 +1,11 @@
-﻿using BusinessManagement.MVVM.View;
-using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows;
-using BusinessManagement.Data;
+﻿using BusinessManagement.Data;
+using BusinessManagement.MVVM.View;
 using BusinessManagement.MVVM.ViewModel;
+using BusinessManagement.Services;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using System.IO;
+using System.Windows;
 
 namespace BusinessManagement
 {
@@ -18,8 +15,15 @@ namespace BusinessManagement
     public partial class App : Application
     {
         private ServiceProvider _serviceProvider;
+        private IConfiguration _configuration;
         public App()
         {
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+
+            _configuration = builder.Build();
+
             ServiceCollection services = new ServiceCollection();
             ConfigureServices(services);
             _serviceProvider = services.BuildServiceProvider();
@@ -27,10 +31,15 @@ namespace BusinessManagement
 
         private void ConfigureServices(ServiceCollection services)
         {
-            services.AddCustomServices();
+            var cxs = _configuration.GetConnectionString("BusinessManagement");
+            services.AddCustomServices(cxs);
 
+            services.AddTransient<IUserRepository, UserRepository>();
+
+            services.AddSingleton<HomeView>();
             services.AddSingleton<HomeViewModel>();
             services.AddSingleton<MainWindow>();
+            services.AddSingleton<MainWindowViewModel>();
         }
 
         private void OnStartUp(object sender, StartupEventArgs e)

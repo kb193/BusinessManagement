@@ -1,9 +1,9 @@
 ﻿using BusinessManagement.Data;
 using BusinessManagement.MVVM.ViewModel;
+using BusinessManagement.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -14,6 +14,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Unity;
 
 namespace BusinessManagement.MVVM.View
 {
@@ -22,9 +23,9 @@ namespace BusinessManagement.MVVM.View
     /// </summary>
     public partial class HomeView : Window
     {
-
-        public HomeView()
+        public HomeView(HomeViewModel homeVm)
         {
+            DataContext = homeVm;
             InitializeComponent();
         }
     }
