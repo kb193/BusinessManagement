@@ -1,6 +1,7 @@
 ﻿using BusinessManagement.Data;
 using BusinessManagement.MVVM.View;
 using BusinessManagement.MVVM.ViewModel;
+using BusinessManagement.MVVM.ViewModel.Contracts;
 using BusinessManagement.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -35,6 +36,9 @@ namespace BusinessManagement
             services.AddCustomServices(cxs);
 
             services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<IDashboardViewModel, DashboardViewModel>();
+            services.AddTransient<ICustomersViewModel, CustomersViewModel>();
+            services.AddTransient<ISuppliersViewModel, SuppliersViewModel>();
 
             services.AddSingleton<HomeView>();
             services.AddSingleton<HomeViewModel>();

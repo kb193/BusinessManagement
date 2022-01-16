@@ -1,6 +1,7 @@
 ﻿using BusinessManagement.Core;
 using BusinessManagement.Data;
 using BusinessManagement.Models;
+using BusinessManagement.MVVM.ViewModel.Contracts;
 using BusinessManagement.Services;
 using System;
 using System.Collections.Generic;
@@ -11,35 +12,48 @@ using System.Threading.Tasks;
 
 namespace BusinessManagement.MVVM.ViewModel
 {
-    public class HomeViewModel : INotifyPropertyChanged
+    public class HomeViewModel : ViewModelBase
     {
-        private readonly IUserRepository userRepo;
+        public ICustomersViewModel CustomersVm { get; set; }
+        public ISuppliersViewModel SuppliersVm { get; set; }
+        public IDashboardViewModel DashboardVm { get; set; }
 
-        public event PropertyChangedEventHandler PropertyChanged = delegate { };
+        public RelayCommand CustomersVmCommand { get; set; }
+        public RelayCommand SuppliersVmCommand { get; set; }
+        public RelayCommand DashboardVmCommand { get; set; }
+      
+        private object? currentView;
 
-        private List<User> _users;
-        public List<User> Users
+        public object? CurrentView
         {
-            get => _users;
-            set
+            get => currentView; set
             {
-                _users = value;
-                PropertyChanged(this, new PropertyChangedEventArgs(nameof(Users)));
+                currentView = value;
+                OnPropertyChanged();
             }
         }
 
-        public RelayCommand GetUsersCommand { get; set; }
-
-        public HomeViewModel(IUserRepository userRepo)
+        public HomeViewModel(ICustomersViewModel customerVm, ISuppliersViewModel suppliersVm, IDashboardViewModel dashboardVm)
         {
-            this.userRepo = userRepo;
+            CustomersVm = customerVm;
+            SuppliersVm = suppliersVm;
+            DashboardVm = dashboardVm;
 
-            GetUsersCommand = new RelayCommand(async (o) =>
+            CustomersVmCommand = new RelayCommand(o =>
             {
-                Users = await userRepo.GetUsersAsync();
+                CurrentView = CustomersVm;
             });
 
-            //Users = userRepo.GetUsersAsync().Result;
+            SuppliersVmCommand = new RelayCommand(o =>
+            {
+                CurrentView = SuppliersVm;
+            });
+
+            DashboardVmCommand = new RelayCommand(o => { 
+                CurrentView = DashboardVm; 
+            });
+
+            CurrentView = DashboardVm;
         }
 
 

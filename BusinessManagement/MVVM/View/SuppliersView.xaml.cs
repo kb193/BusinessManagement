@@ -1,7 +1,4 @@
-﻿using BusinessManagement.Data;
-using BusinessManagement.MVVM.ViewModel;
-using BusinessManagement.Services;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,18 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace BusinessManagement.MVVM.View
 {
     /// <summary>
-    /// Interaction logic for HomeView.xaml
+    /// Interaction logic for SuppliersView.xaml
     /// </summary>
-    public partial class HomeView : Window
+    public partial class SuppliersView : UserControl
     {
-        public HomeView(HomeViewModel homeVm)
+        public SuppliersView()
         {
-            DataContext = homeVm;
             InitializeComponent();
         }
     }

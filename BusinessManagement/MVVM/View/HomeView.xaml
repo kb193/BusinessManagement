@@ -36,33 +36,34 @@
                        FontFamily="/Fonts/#Poppins" Height="84" Width="190"/>
 
             <StackPanel Grid.Row="1">
-                <RadioButton Content="Home"
+                <RadioButton Content="Dashboard"
                              Height="50"
                              Foreground="White"
                              FontSize="18"
                              Style="{StaticResource MenuButtonTheme}"
                              IsChecked="True"
-                             Command="{Binding HomeViewCommand}"/>
+                             Command="{Binding DashboardVmCommand}"/>
                 <RadioButton Content="Customers"
                              Height="50"
                              Foreground="White"
                              FontSize="18"
                              Style="{StaticResource MenuButtonTheme}"
-                             Command="{Binding HomeViewCommand}"/>
+                             Command="{Binding CustomersVmCommand}"/>
                 <RadioButton Content="Suppliers"
                              Height="50"
                              Foreground="White"
                              FontSize="18"
                              Style="{StaticResource MenuButtonTheme}"
-                             Command="{Binding HomeViewCommand}"/>
+                             Command="{Binding SuppliersVmCommand}"/>
             </StackPanel>
 
-            <Button Grid.Column="1" Grid.Row="1"
-                    Command="{Binding GetUsersCommand}">Get users</Button>
-            
-            <StackPanel Grid.Row="1" Grid.Column="1">
-                <DataGrid Name="UsersGrid" ItemsSource="{Binding Users}"/>
-            </StackPanel>
+
+            <ContentControl Grid.Row="1"
+                            Grid.Column="1"
+                            Margin="10"
+                            Content="{Binding CurrentView}">
+
+            </ContentControl>
         </Grid>
     </Border>
 </Window>
