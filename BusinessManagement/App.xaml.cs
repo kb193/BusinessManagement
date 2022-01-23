@@ -39,6 +39,8 @@ namespace BusinessManagement
             services.AddTransient<IDashboardViewModel, DashboardViewModel>();
             services.AddTransient<ICustomersViewModel, CustomersViewModel>();
             services.AddTransient<ISuppliersViewModel, SuppliersViewModel>();
+            services.AddTransient<IAddCustomerViewModel, AddCustomerViewModel>();
+            services.AddTransient<ICustomersGridViewModel, CustomersGridViewModel>();
 
             services.AddSingleton<HomeView>();
             services.AddSingleton<HomeViewModel>();
