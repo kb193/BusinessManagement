@@ -1,5 +1,6 @@
 ﻿using BusinessManagement.Core;
 using BusinessManagement.MVVM.ViewModel.Contracts;
+using BusinessManagement.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,10 +15,8 @@ namespace BusinessManagement.MVVM.ViewModel
         public RelayCommand CustomersEditVmCommand { get; set; }
         public RelayCommand CustomerAddVmCommand { get; set; }
 
-        public IAddCustomerViewModel AddCustomerViewModel { get; }
 
         private object? currentView;
-
         public object? CurrentView
         {
             get => currentView; set
@@ -27,17 +26,13 @@ namespace BusinessManagement.MVVM.ViewModel
             }
         }
 
-        public CustomersGridViewModel(IAddCustomerViewModel addCustomerViewModel)
+        public CustomersGridViewModel() 
         {
-            AddCustomerViewModel = addCustomerViewModel;
-                       
 
-            CustomerAddVmCommand = new RelayCommand(o =>
-            {
-                CurrentView = AddCustomerViewModel;
-            });
+       
 
-            CurrentView = this;
         }
+
+
     }
 }

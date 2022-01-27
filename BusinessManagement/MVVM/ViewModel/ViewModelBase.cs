@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BusinessManagement.MVVM.ViewModel.Contracts;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -16,5 +17,7 @@ namespace BusinessManagement.MVVM.ViewModel
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
+
+
     }
 }
